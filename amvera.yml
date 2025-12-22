@@ -1,0 +1,8 @@
+meta:
+  toolchain:
+    name: dotnet
+    version: "8.0"
+
+run:
+  command: dotnet ReminderApi.dll
+  port: 8080
