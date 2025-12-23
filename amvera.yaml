@@ -3,6 +3,9 @@ meta:
     name: dotnet
     version: "8.0"
 
+build:
+  project: ReminderApi/ReminderApi.csproj
+
 run:
-  command: dotnet ReminderApi.dll
+  command: dotnet run --project ReminderApi/ReminderApi.csproj --urls http://0.0.0.0:8080
   port: 8080
