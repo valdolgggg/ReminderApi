@@ -1,20 +1,31 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// ВАЖНО для Amvera
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-
+// Добавляем сервисы
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// ВКЛЮЧАЕМ SWAGGER ВСЕГДА (важно для Amvera)
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Reminder API v1");
+    c.RoutePrefix = "swagger"; // swagger доступен по /swagger
+});
 
+app.UseAuthorization();
+
+// Контроллеры
 app.MapControllers();
 
-app.MapGet("/", () => "Reminder API is running");
+// РЕДИРЕКТ С КОРНЯ НА SWAGGER
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
+// Запуск приложения
 app.Run();
