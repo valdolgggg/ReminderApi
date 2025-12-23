@@ -1,7 +1,8 @@
 meta:
-  toolchain:
-    name: docker
+  environment: production
+
+toolchain:
+  name: docker
 
 run:
-  container:
-    port: 8080
+  containerPort: 8080
