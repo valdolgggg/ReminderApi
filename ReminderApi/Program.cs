@@ -15,4 +15,6 @@ app.UseSwaggerUI();
 
 app.MapControllers();
 
+app.MapGet("/", () => "Reminder API is running");
+
 app.Run();
