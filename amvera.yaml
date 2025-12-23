@@ -1,0 +1,7 @@
+meta:
+  toolchain:
+    name: docker
+
+run:
+  container:
+    port: 8080
